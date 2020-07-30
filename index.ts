@@ -133,3 +133,74 @@ const cloth1: {
   color: "white",
   size: "medium",
 };
+
+// typeエイリアスを使って複雑な型を変数のように扱う ----------------------------------------------
+
+// ＊関数に型を適応させる方法で型をつける場所はパラメータ-と戻り値につける
+// ＊またパラメーターは引数の後につけ、戻り値はパラメーター の後につける
+function plus(num1: number, num2: number): number | string {
+  return num1 + num2;
+}
+
+// 関数の戻り値にvoid型を使う方法 ----------------------------------------------
+
+// *void方は何も返さない
+// *基本undefindは使わない、voidかanyを使う
+
+function sayHello(): void {
+  console.log("hey man");
+}
+
+console.log(sayHello());
+let tmp: undefined;
+
+// undefined型とnull型についての補足 ----------------------------------------------
+
+function sayHello1(): void {
+  console.log("hey man");
+}
+
+console.log(sayHello1());
+let tmp: undefined;
+let tmpNull: null = undefined;
+
+// 関数型を使って、特定の関数のみを代入できる変数を作る ----------------------------------------------
+const anotherAdd: (n1: number, n2: number) => number = function plus(
+  num1: number,
+  num2: number
+) {
+  return num1 + num2;
+};
+
+const doubleNumber = (number: number): number => number * 2;
+const doubleNumber: (number: number) => number = (number) => number * 2;
+
+// callback関数の型はこう書く ----------------------------------------------
+
+function doubleAndHandle(num: number, cb: (num: number) => number): void {
+  const doubleNum = cb(num * 2);
+  console.log(doubleNum);
+}
+doubleAndHandle(21, (doubleNum) => {
+  return doubleNum;
+});
+
+// unknown型を使って、柔軟でanyよりも厳しい型を定義する方法 ----------------------------------------------
+let unknownInut: unknown;
+let anyInput: any;
+let text: string;
+unknownInut = "hello";
+unknownInut = 21;
+unknownInut = true;
+text = anyInput;
+
+// if文をかますことでunknownが使える
+if (typeof unknownInut === "string") {
+  text = unknownInut;
+}
+
+// never型を使って、起こり得ない値の型を使用する方法    ----------------------------------------------
+
+function error(message: string): never {
+  throw new Error(message);
+}
