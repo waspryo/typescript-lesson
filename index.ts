@@ -1,3 +1,5 @@
+import { type } from "os";
+
 // functionの型 ----------------------------------------------
 function add(a: number, b: number): number {
   return a + b;
@@ -89,3 +91,45 @@ anything.nice = "hey man";
 console.log(anything.nice);
 let banana = "banana";
 banana = anything;
+
+// Union型を使って複数の型 を使う方法 ----------------------------------------------
+
+// 数字も文字もbooleanも入れたい
+let unionType: number | string = 19;
+
+// 配列を作る場合はカッコ()をつける
+let unionTypes: (number | string)[] = [21, "hello"];
+
+// Literal型を使って特定の値のみを取り扱う方法 ----------------------------------------------
+
+// appleを定義したらappleしか受け付けない,
+// またconstで定義したものは型推論でリテラル型になる
+
+const apple: "apple" = "apple";
+const pinapple: true = false;
+
+// 肩注釈で2,3くらいならUnionとリテラル型を組み合わせる
+
+let clothSize: "small" | "medium" | "large" = "large";
+const cloth: {
+  color: string;
+  size: "small" | "medium" | "large";
+} = {
+  color: "white",
+  size: "medium",
+};
+
+// typeエイリアスを使って複雑な型を変数のように扱う ----------------------------------------------
+// エイリアスは別名と言う
+
+// typeと打つとletやconstみたいに扱える
+type ClothSize = "small" | "medium" | "large";
+
+let clothSizes: ClothSize = "large";
+const cloth1: {
+  color: string;
+  size: ClothSize;
+} = {
+  color: "white",
+  size: "medium",
+};
