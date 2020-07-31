@@ -106,7 +106,7 @@ let unionTypes: (number | string)[] = [21, "hello"];
 // またconstで定義したものは型推論でリテラル型になる
 
 const apple: "apple" = "apple";
-const pinapple: true = false;
+const pinapple: true = true;
 
 // 肩注釈で2,3くらいならUnionとリテラル型を組み合わせる
 
@@ -152,7 +152,7 @@ function sayHello(): void {
 }
 
 console.log(sayHello());
-let tmp: undefined;
+let tmp1: undefined;
 
 // undefined型とnull型についての補足 ----------------------------------------------
 
@@ -162,7 +162,7 @@ function sayHello1(): void {
 
 console.log(sayHello1());
 let tmp: undefined;
-let tmpNull: null = undefined;
+// let tmpNull: null = undefined;
 
 // 関数型を使って、特定の関数のみを代入できる変数を作る ----------------------------------------------
 const anotherAdd: (n1: number, n2: number) => number = function plus(
@@ -173,7 +173,7 @@ const anotherAdd: (n1: number, n2: number) => number = function plus(
 };
 
 const doubleNumber = (number: number): number => number * 2;
-const doubleNumber: (number: number) => number = (number) => number * 2;
+const doubleNumber1: (number: number) => number = (number) => number * 2;
 
 // callback関数の型はこう書く ----------------------------------------------
 
