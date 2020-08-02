@@ -1,5 +1,8 @@
-function echo(message: string): string | null {
-  return message;
+function echo(message: string): string | undefined {
+  if (message) {
+    return message;
+  }
+  return;
 }
 
 let implictAny;
