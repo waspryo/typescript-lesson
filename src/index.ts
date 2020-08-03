@@ -204,3 +204,31 @@ if (typeof unknownInut === "string") {
 function error(message: string): never {
   throw new Error(message);
 }
+
+//  interfaceはこう使う！    ----------------------------------------------
+
+//*== 変数みたいなのにまとめたのがinterface(オブジェクトの表面を表したもの)
+//*==typeとinterfaceの違い
+// interfaceはオブジェクトのみ
+// typeエイリアスは全部いける
+
+// typeエイリアスで書く場合、|のユニオンが使える
+type season = {
+  spring: string;
+  summuer: string;
+  autumn: string;
+  winter: string;
+};
+
+// interfaceで書く場合、オブジェクトだと一発でわかる
+interface Human {
+  name: string;
+  age: number;
+}
+
+const human: Human = {
+  name: "Quill",
+  age: 39,
+};
+
+let developer: Human;
