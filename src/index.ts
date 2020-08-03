@@ -261,7 +261,7 @@ interface Human {
   age: number
   greeting(message: string): void;
 }
-class Developer implements Human{
+class Developer1 implements Human{
   constructor(public name: string, public age: number){}
   greeting(message: String){
       console.log('hello')
@@ -274,18 +274,111 @@ interface Human {
   age: number
   greeting(message: string): void;
 }
-class Developer implements Human{
+class Developer2 implements Human{
   constructor(public name: string, public age: number, experience: number){}
   greeting(message: String){
-      console.log(message)
-    }
+    console.log(message)
   }
-  const tmpDeveloper = {
-    name: 'Quill',
-    age: 32,
-    experience: 3,
-    greeting(message: string){
-      console.log(message)
-    }
+}
+const tmpDeveloper1 = {
+  name: 'Quill',
+  age: 32,
+  experience: 3,
+  greeting(message: string){
+    console.log(message)
   }
-  const user: Human = tmpDeveloper
+}
+  const user: Human = tmpDeveloper1
+
+//   readonly修飾子をinterfaceに使って読むだけのプロパティを作る方法    ----------------------------------------------
+type Human1 ={
+  readonly name: string;
+  age: number
+  greeting(message: string): void;
+}
+class Developer3 implements Human1{
+  constructor(public name: string, public age: number, experience: number){}
+  greeting(message: String){
+    console.log(message)
+  }
+}
+const tmpDeveloper = {
+  name: 'Quill',
+  age: 32,
+  experience: 3,
+  greeting(message: string){
+    console.log(message)
+  }
+}
+  const user: Human1 = tmpDeveloper
+
+// extendsを使ってinterfaceを継承する方法    ----------------------------------------------
+// interfaceの場合は何個でも継承できる
+interface Nameable {
+  name: string
+}
+
+interface Human1 extends Nameable{
+  name: string
+  // anyもできる(基本継承先は同じに合わせる必要がある)
+  // name: any
+  age: number
+  greeting(message: string): void;
+}
+interface Human1 extends Nameable{
+  name: string
+  // anyもできる(基本継承先は同じに合わせる必要がある)
+  // name: any
+  age: number
+  greeting(message: string): void;
+}
+
+// extendsと同じ意味
+type Human2 ={
+  name: string
+  age: number
+  greeting(message: string): void;
+} & Nameable
+
+// interfaceで関数の型を表現する方法    ----------------------------------------------
+
+// *==interfaceは関数の型も定義できる
+// *==無名関数のように書くことで関数の型も定義できる
+interface addFunc1{
+  (num1: number, num2: number):number;
+}
+let addFunc: addFunc1
+
+
+
+// ?を使って、あってもなくても良いオプショナルプロパティとオプショナルパラメーターを使用する方法    ----------------------------------------------
+
+// *==?はあってもなくてもいいと言う意味
+// *==typeじゃなくてもinterfaceでも使える
+// *==メソッドにもつけることができる
+
+type Nameable1= {
+  name: string;
+  ncikName?: string
+}
+
+const nameable2: Nameable1 = {
+  name: 'Quill',
+  ncikName: 'Quiila'
+}
+
+// *==パラメーターにもつけることができる
+class Developer4 implements Human1{
+  constructor(public name: string, public age: number, experience: number){}
+  // *==?をつけるとユニオン型にるからif文をつける
+  greeting(message?: String){
+    if (message) {
+      message.toUpperCase()
+    }
+    console.log(message)
+  }
+  // *==?デフォルト引数を設定できる
+  sayHello(message: string = 'hello'){
+    console.log(message)
+  }
+}
