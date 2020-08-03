@@ -1,4 +1,5 @@
 import { type } from "os";
+import { strictEqual } from "assert";
 
 // functionの型 ----------------------------------------------
 function add(a: number, b: number): number {
@@ -223,7 +224,7 @@ type season = {
 // interfaceで書く場合、オブジェクトだと一発でわかる
 interface Human {
   name: string;
-  age: number;
+  age: num  ber;
 }
 
 const human: Human = {
@@ -232,3 +233,59 @@ const human: Human = {
 };
 
 let developer: Human;
+
+//  メソッドをオブジェクトの型に指定する方法    ----------------------------------------------
+// オブジェクトの中の関数ならアロー関数なしで書ける
+interface Demon {
+  name: string;
+  age: number;
+  // 書き方二つ
+  // greeting: (message: string) => void
+  greeting(message: string): void;
+}
+
+const demon = {
+  name: "satan",
+  age: 9999,
+  greeting(message: string): void {
+    console.log(message);
+  },
+};
+
+// 型注釈
+let tmpFunc: (Message: string) => void;
+
+//  implementsを使用して、クラスに対してinterfaceの条件を適応させる方法    ----------------------------------------------
+interface Human {
+  name: string;
+  age: number
+  greeting(message: string): void;
+}
+class Developer implements Human{
+  constructor(public name: string, public age: number){}
+  greeting(message: String){
+      console.log('hello')
+    }
+  }
+//  これがTypeScriptの構造的部分型だ！    ----------------------------------------------
+// interfaceの最低限の物を抑えていれば追加しても大丈夫
+interface Human {
+  name: string;
+  age: number
+  greeting(message: string): void;
+}
+class Developer implements Human{
+  constructor(public name: string, public age: number, experience: number){}
+  greeting(message: String){
+      console.log(message)
+    }
+  }
+  const tmpDeveloper = {
+    name: 'Quill',
+    age: 32,
+    experience: 3,
+    greeting(message: string){
+      console.log(message)
+    }
+  }
+  const user: Human = tmpDeveloper
